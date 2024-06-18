@@ -5,9 +5,12 @@
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.hbazai.carcrashprj.HelloController">
+      fx:controller="com.hbazai.carcrashprj.HelloController" stylesheets="@styles.css">
     <children>
-        <Button layoutX="177.0" layoutY="536.0" mnemonicParsing="false" onAction="#startBtnAction" scaleX="2.0"
-                scaleY="2.0" text="Play"/>
+        <VBox alignment="CENTER" spacing="70.0" prefWidth="400.0" prefHeight="600.0">
+            <Button id="playButton" mnemonicParsing="false" onAction="#startBtnAction" scaleX="2.0" scaleY="2.0" text="Play"/>
+            <Button id="registerButton" mnemonicParsing="false" onAction="#registerBtnAction" text="Register"/>
+            <Button id="loginButton" mnemonicParsing="false" onAction="#loginBtnAction" text="Login"/>
+        </VBox>
     </children>
 </Pane>

@@ -1,0 +1,68 @@
+/* styles.css */
+.anchor-pane {
+    -fx-background-image: url('menu-bg.png');
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
+}
+
+.text-field {
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+}
+
+.button {
+    -fx-font-size: 16px;
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+
+.red-button {
+    -fx-font-size: 16px;
+    -fx-background-color: #e74c3c; /* Red color */
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+.red-button:hover {
+    -fx-background-color: #c0392b; /* Darker red on hover */
+}
+
+.green-button{
+    -fx-font-size: 16px;
+    -fx-background-color: #2ac22c; /* Red color */
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+.green-button:hover {
+    -fx-background-color: #26c53c; /* Darker red on hover */
+}

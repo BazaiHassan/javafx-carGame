@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hbazai.carcrashprj.Fuel.consumeFuel;
+
 public class ScreenManager {
     private Pane mainPane;
     private List<ImageView> hearts; // List to store heart images
@@ -25,6 +27,7 @@ public class ScreenManager {
     private int passedOrDestroyedCount = 0; // Counter for passed or destroyed enemy cars
     private boolean gameOver = false;
     private GenerateEnemyCar generateEnemyCar;
+    private int numberOfFuel = 5;
 
     public ScreenManager(Pane mainPane) {
         this.mainPane = mainPane;
@@ -34,9 +37,16 @@ public class ScreenManager {
     }
 
     public void start() throws FileNotFoundException {
+        Fuel.initialize(mainPane);
+        Coin.initialize(mainPane);
         addRoad();
         addHeart();
-        addFuel();
+        try {
+            Fuel.addFuel(numberOfFuel);
+            Coin.addCoinCounter();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         consumeFuel();
         GasStation gasStation = new GasStation(0, 0, 50, 50, new Image(new FileInputStream("images/gas-station.png")));
         Timeline fuelAddTimeLine = new Timeline(new KeyFrame(Duration.seconds(10), actionEvent -> {
@@ -97,7 +107,7 @@ public class ScreenManager {
 
                 if (isCollideWithGas(playerCar,gasStation )){
                     try {
-                        addFuel();
+                        Fuel.addFuel(numberOfFuel);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -179,20 +189,6 @@ public class ScreenManager {
         }
     }
 
-    private void addFuel() throws FileNotFoundException {
-        int numberOfFuel = 5;
-
-        for (int i = 0; i < numberOfFuel; i++) {
-            Image img = new Image(new FileInputStream("images/fuel.png"));
-            ImageView fuelImg = new ImageView(img);
-            fuelImg.setLayoutX(i * 20 + 280);
-            fuelImg.setLayoutY(10);
-            fuelImg.setFitHeight(20);
-            fuelImg.setFitWidth(20);
-            fuels.add(fuelImg); // Add fuel to the list
-            mainPane.getChildren().add(fuelImg);
-        }
-    }
 
     private void removeHeart() {
         if (!hearts.isEmpty()) {
@@ -201,21 +197,6 @@ public class ScreenManager {
         }
     }
 
-    private void consumeFuel() {
-        Timeline fuelTimeLine = new Timeline(new KeyFrame(Duration.seconds(20), actionEvent -> {
-            if (fuels.size() > 0) {
-                ImageView fuel = fuels.remove(fuels.size() - 1);
-                mainPane.getChildren().remove(fuel);
-            } else {
-                Platform.runLater(() -> {
-                    showGameOverAlert();
-                    stopGame();
-                });
-            }
-        }));
-        fuelTimeLine.setCycleCount(Timeline.INDEFINITE);
-        fuelTimeLine.play();
-    }
 
     private boolean isCollision(PlayerCar playerCar, EnemyCar enemyCar) {
         if (playerCar.getBoundsInParent().intersects(enemyCar.getBoundsInParent())) {

@@ -1,0 +1,48 @@
+/* styles.css */
+.button {
+    -fx-font-size: 16px;
+    -fx-background-radius: 15;
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 10, 0, 0, 10);
+    -fx-margin: 10; /* Add margins */
+}
+
+.button:hover {
+    -fx-background-color: #45a049; /* Darker green */
+}
+
+#playButton {
+    -fx-background-color: #008CBA; /* Blue */
+    -fx-margin: 10; /* Add margins */
+}
+
+#playButton:hover {
+    -fx-background-color: #007B9A; /* Darker blue */
+}
+
+#registerButton {
+    -fx-background-color: #f44336; /* Red */
+    -fx-margin: 10; /* Add margins */
+}
+
+#registerButton:hover {
+    -fx-background-color: #d32f2f; /* Darker red */
+}
+
+#loginButton {
+    -fx-background-color: #e7e7e7; /* Light gray */
+    -fx-text-fill: black;
+    -fx-margin: 10; /* Add margins */
+}
+
+#loginButton:hover {
+    -fx-background-color: #d6d6d6; /* Darker gray */
+}
+
+#mainPane {
+    -fx-background-image: url('menu-bg.png'); /* Path to your background image */
+    -fx-background-size: cover; /* Make the image cover the entire pane */
+    -fx-background-position: center center; /* Center the background image */
+}
