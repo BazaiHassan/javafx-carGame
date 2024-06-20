@@ -24,10 +24,21 @@ public class HelloController {
         setMainPaneBackground();
     }
 
+//    @FXML
+//    protected void scoreBtnAction() throws FileNotFoundException {
+//        ScreenManager sm = new ScreenManager(mainPane);
+//        sm.start();
+//    }
+
     @FXML
-    protected void startBtnAction() throws FileNotFoundException {
-        ScreenManager sm = new ScreenManager(mainPane);
-        sm.start();
+    protected void scoreBtnAction(ActionEvent event){
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scores scores = new Scores();
+            scores.showScoresScene(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

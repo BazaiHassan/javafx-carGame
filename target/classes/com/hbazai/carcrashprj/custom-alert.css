@@ -1,0 +1,22 @@
+.custom-dialog-pane {
+    -fx-background-color: transparent;
+}
+
+.custom-dialog-pane .button {
+    -fx-background-color: #6699cc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.custom-dialog-pane .button:hover {
+    -fx-background-color: #336699;
+}
+
+.custom-dialog-pane .button:pressed {
+    -fx-background-color: #003366;
+}
+
+.custom-dialog-pane .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}

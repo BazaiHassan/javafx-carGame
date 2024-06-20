@@ -51,7 +51,7 @@ public class ScreenManager {
         GasStation gasStation = new GasStation(0, 0, 50, 50, new Image(new FileInputStream("images/gas-station.png")));
         Timeline fuelAddTimeLine = new Timeline(new KeyFrame(Duration.seconds(10), actionEvent -> {
             try {
-                addRandomGasStation(gasStation,mainPane, 5); // Add a random gas station
+                addRandomGasStation(gasStation, mainPane, 5); // Add a random gas station
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -105,7 +105,7 @@ public class ScreenManager {
                     }
                 }
 
-                if (isCollideWithGas(playerCar,gasStation )){
+                if (isCollideWithGas(playerCar, gasStation)) {
                     try {
                         Fuel.addFuel(numberOfFuel);
                     } catch (FileNotFoundException e) {
@@ -206,8 +206,8 @@ public class ScreenManager {
         return false;
     }
 
-    private boolean isCollideWithGas(PlayerCar playerCar, GasStation gasStation){
-        if (playerCar.getBoundsInParent().intersects(gasStation.getBoundsInParent())){
+    private boolean isCollideWithGas(PlayerCar playerCar, GasStation gasStation) {
+        if (playerCar.getBoundsInParent().intersects(gasStation.getBoundsInParent())) {
             mainPane.getChildren().remove(gasStation);
             return true;
         }
@@ -259,12 +259,12 @@ public class ScreenManager {
 
     private void increaseEnemyCarSpeed(GenerateEnemyCar generateEnemyCar) {
         // Double the speed of new and existing enemy cars
-        int newSpeed = generateEnemyCar.getSpeed() / 2;
+        double newSpeed = generateEnemyCar.getSpeed() * 0.6;
         System.out.println(newSpeed);
         generateEnemyCar.setEnemyCarsSpeed(newSpeed);
     }
 
-    private void addRandomGasStation(GasStation gasStation,Pane pane, int speed) throws FileNotFoundException {
+    private void addRandomGasStation(GasStation gasStation, Pane pane, int speed) throws FileNotFoundException {
         gasStation.showRandomlyOnScreen(mainPane);
         gasStation.moveDown(pane, speed);
     }

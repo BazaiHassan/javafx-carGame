@@ -1,0 +1,47 @@
+/* styles.css */
+.anchor-pane {
+    -fx-background-image: url('menu-bg.png');
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.table-view {
+    -fx-background-color: black;
+    -fx-border-color: #ff0000;
+    -fx-border-width: 2px;
+}
+
+.table-column-header {
+    -fx-background-color: #000000;
+    -fx-text-fill: #54f802;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: black;
+    -fx-border-color: #ff0000;
+}
+
+.table-cell {
+    -fx-padding: 10px;
+    -fx-text-fill: green;
+}
+
+.table-cell:selected, .table-row-cell:selected {
+    -fx-background-color: #6699cc;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.back-button {
+    -fx-padding: 10px 20px;
+    -fx-background-color: #e70202;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}

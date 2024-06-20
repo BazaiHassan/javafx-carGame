@@ -13,13 +13,13 @@
     -fx-background-color: #45a049; /* Darker green */
 }
 
-#playButton {
-    -fx-background-color: #008CBA; /* Blue */
+#scoreButton {
+    -fx-background-color: #f8eb07; /* Blue */
     -fx-margin: 10; /* Add margins */
 }
 
-#playButton:hover {
-    -fx-background-color: #007B9A; /* Darker blue */
+#scoreButton:hover {
+    -fx-background-color: #e7db13; /* Darker blue */
 }
 
 #registerButton {

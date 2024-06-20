@@ -8,9 +8,9 @@ import javafx.util.Duration;
 
 
 public class EnemyCar extends ScreenObject {
-    private int speed;
+    private double speed;
 
-    public EnemyCar(int x, int y, int width, int height, Image img, int speed) {
+    public EnemyCar(int x, int y, int width, int height, Image img, double speed) {
         super(x, y, width, height, img);
         this.speed = speed;
     }
@@ -29,11 +29,11 @@ public class EnemyCar extends ScreenObject {
         movingTimeline.play();
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class GenerateEnemyCar {
     private Pane pane;
     private List<EnemyCar> enemyCars;
-    private int speed;
+    private double speed;
 
     public GenerateEnemyCar(Pane pane) {
         this.pane = pane;
@@ -41,14 +41,14 @@ public class GenerateEnemyCar {
         carGenTimeLine.play();
     }
 
-    public void setEnemyCarsSpeed(int speed) {
+    public void setEnemyCarsSpeed(double speed) {
         this.speed = speed; // Update the speed value for future cars
         for (EnemyCar enemyCar : enemyCars) {
             enemyCar.setSpeed(speed);
         }
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
