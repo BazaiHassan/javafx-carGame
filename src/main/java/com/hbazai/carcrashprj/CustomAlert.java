@@ -12,7 +12,7 @@ public class CustomAlert extends Dialog<ButtonType> {
     public CustomAlert(String title, String message) {
         setTitle(title);
 
-        // Create components
+
         Label label = new Label(message);
         label.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
 
@@ -22,15 +22,13 @@ public class CustomAlert extends Dialog<ButtonType> {
 
         getDialogPane().setContent(content);
 
-        // Style the dialog pane
+
         getDialogPane().getStylesheets().add(
                 getClass().getResource("custom-alert.css").toExternalForm());
         getDialogPane().getStyleClass().add("custom-dialog-pane");
 
-        // Set stage style to transparent
         initStyle(StageStyle.TRANSPARENT);
 
-        // Add OK button to close the dialog
         getDialogPane().getButtonTypes().addAll(ButtonType.OK);
     }
 }

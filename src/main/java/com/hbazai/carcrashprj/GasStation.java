@@ -10,8 +10,8 @@ import java.util.Random;
 
 
 public class GasStation extends ScreenObject {
-    private static final int SCREEN_HEIGHT = 600; // Height of the screen
-    private static final int SCREEN_WIDTH = 400;
+    private static final int SCREEN_HEIGHT = 600;
+
     private Timeline movementTimeline;
 
     public GasStation(int x, int y, int width, int height, Image img) {
@@ -35,14 +35,12 @@ public class GasStation extends ScreenObject {
             movementTimeline.stop();
         }
 
-        // Create a new Timeline for moving the gas station down
         movementTimeline = new Timeline(new KeyFrame(Duration.millis(60), event -> {
-            setY(getY() + speed); // Move the gas station down by 'speed' units
+            setY(getY() + speed);
 
-            // Check if the gas station is out of the screen
             if (getY() > SCREEN_HEIGHT) {
-                removeFromPane(pane); // Remove from pane if out of the screen
-                movementTimeline.stop(); // Stop the timeline
+                removeFromPane(pane);
+                movementTimeline.stop();
             }
         }));
 

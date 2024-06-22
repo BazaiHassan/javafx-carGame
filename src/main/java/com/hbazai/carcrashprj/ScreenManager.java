@@ -5,14 +5,16 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class ScreenManager {
     private boolean gameOver = false;
     private GenerateEnemyCar generateEnemyCar;
     private int numberOfFuel = 5;
+    private Label label = new Label();
 
     public ScreenManager(Pane mainPane) {
         this.mainPane = mainPane;
@@ -41,6 +44,7 @@ public class ScreenManager {
         Coin.initialize(mainPane);
         addRoad();
         addHeart();
+
         try {
             Fuel.addFuel(numberOfFuel);
             Coin.addCoinCounter();
@@ -49,15 +53,27 @@ public class ScreenManager {
         }
         consumeFuel();
         GasStation gasStation = new GasStation(0, 0, 50, 50, new Image(new FileInputStream("images/gas-station.png")));
+        Coin coin = new Coin(0, 0, 50, 50, new Image(new FileInputStream("images/coin.png")));
+        addLabelToPane(mainPane,label,String.valueOf(Constants.SCORE),320,40);
         Timeline fuelAddTimeLine = new Timeline(new KeyFrame(Duration.seconds(10), actionEvent -> {
             try {
-                addRandomGasStation(gasStation, mainPane, 5); // Add a random gas station
+                addRandomGasStation(gasStation, mainPane, 5);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }));
+
+        Timeline coinAddTimeLine = new Timeline(new KeyFrame(Duration.seconds(10), actionEvent -> {
+            try {
+                addRandomCoin(coin, mainPane, 7);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }));
 
         fuelAddTimeLine.setCycleCount(Timeline.INDEFINITE);
+        coinAddTimeLine.setCycleCount(Timeline.INDEFINITE);
+        coinAddTimeLine.play();
         fuelAddTimeLine.play();
         PlayerCar playerCar = new PlayerCar(180, 450, 50, 100, new Image(new FileInputStream("images/car1.png")));
         playerCar.addToPane(mainPane);
@@ -111,6 +127,11 @@ public class ScreenManager {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                }
+
+                if(isCollideWithCoin(playerCar, coin )){
+                    Constants.SCORE++;
+                    addLabelToPane(mainPane,label,String.valueOf(Constants.SCORE),320,40);
                 }
             }
             // Check for bullet and enemy car collisions
@@ -214,7 +235,16 @@ public class ScreenManager {
         return false;
     }
 
+    private boolean isCollideWithCoin(PlayerCar playerCar, Coin coin){
+        if (playerCar.getBoundsInParent().intersects(coin.getBoundsInParent())) {
+            mainPane.getChildren().remove(coin);
+            return true;
+        }
+        return false;
+    }
+
     private void showGameOverAlert() {
+        // Show Custom Alert
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(null);
@@ -225,7 +255,13 @@ public class ScreenManager {
     private void stopGame() {
         gameOver = true;
         collisionCheckTimeline.stop();
-        // Optionally stop other game-related timelines and disable any other game logic
+
+        try {
+            saveScore(Constants.USERNAME, Constants.SCORE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void fireBullet(PlayerCar playerCar) throws FileNotFoundException {
@@ -234,20 +270,18 @@ public class ScreenManager {
         double bulletX = playerBounds.getMinX() + playerCar.getWidth() / 2 - 7.5; // Adjusting for larger bullet
         double bulletY = playerBounds.getMinY() - 40; // Adjusting for larger bullet
 
-        // Create a larger bullet with a red color
         Fire bullet = new Fire(
                 (int) bulletX,
                 (int) bulletY,
-                15, // Increase bullet width
-                30, // Increase bullet height
-                new Image(new FileInputStream("images/bullet.png")) // Use red_bullet image
+                15,
+                30,
+                new Image(new FileInputStream("images/bullet.png"))
         );
         bullets.add(bullet);
         mainPane.getChildren().add(bullet);
 
-        // Animate the bullet to move upwards more slowly
         Timeline bulletTimeline = new Timeline(new KeyFrame(Duration.millis(60), event -> {
-            bullet.setLayoutY(bullet.getLayoutY() - 20); // Update bullet's layout Y position
+            bullet.setLayoutY(bullet.getLayoutY() - 20);
             if (bullet.getLayoutY() < 0) {
                 mainPane.getChildren().remove(bullet);
                 bullets.remove(bullet);
@@ -258,7 +292,6 @@ public class ScreenManager {
     }
 
     private void increaseEnemyCarSpeed(GenerateEnemyCar generateEnemyCar) {
-        // Double the speed of new and existing enemy cars
         double newSpeed = generateEnemyCar.getSpeed() * 0.6;
         System.out.println(newSpeed);
         generateEnemyCar.setEnemyCarsSpeed(newSpeed);
@@ -267,5 +300,58 @@ public class ScreenManager {
     private void addRandomGasStation(GasStation gasStation, Pane pane, int speed) throws FileNotFoundException {
         gasStation.showRandomlyOnScreen(mainPane);
         gasStation.moveDown(pane, speed);
+    }
+
+    private void addRandomCoin(Coin coin, Pane pane, int speed) throws FileNotFoundException {
+        coin.showRandomlyOnScreen(mainPane);
+        coin.moveDown(pane, speed);
+    }
+
+    private void saveScore(String username, int newScore) throws FileNotFoundException {
+
+        File inputFile = new File("users.txt");
+        List<String> lines = new ArrayList<>();
+
+        // Read all lines into a list
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length >= 3) {
+                    String savedUsername = parts[0].trim().substring("Username: ".length());
+                    if (savedUsername.equals(username)) {
+                        line = String.format("Username: %s, Password: %s, Score: %d",
+                                username,
+                                parts[1].trim().substring("Password: ".length()),
+                                newScore);
+                    }
+                }
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile))) {
+            for (String updatedLine : lines) {
+                writer.write(updatedLine);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addLabelToPane(Pane pane,Label label, String labelText, double x, double y) {
+        label.setText(labelText);
+        label.setLayoutX(x);
+        label.setLayoutY(y);
+        label.setTextFill(Color.RED);
+        label.setFont(Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 14));
+        if (!pane.getChildren().contains(label)) {
+            pane.getChildren().add(label);
+        }
     }
 }

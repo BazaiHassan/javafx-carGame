@@ -50,9 +50,9 @@ public class LoginController {
 
         try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
             while ((line = reader.readLine()) != null) {
-                // Split the line to extract username and password
+
                 String[] parts = line.split(", ");
-                if (parts.length >= 2) { // Ensure there are at least two parts (username and password)
+                if (parts.length >= 2) {
                     String savedUsername = parts[0].trim().substring("Username: ".length());
                     String savedPassword = parts[1].trim().substring("Password: ".length());
 

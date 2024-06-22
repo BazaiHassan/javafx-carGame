@@ -55,10 +55,10 @@ public class Fuel extends ScreenObject {
     }
 
     private static void showGameOverAlert() {
-        // Implementation of game over alert
+
     }
 
     private static void stopGame() {
-        // Implementation to stop the game
+
     }
 }

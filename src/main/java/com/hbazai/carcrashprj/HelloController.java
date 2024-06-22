@@ -20,7 +20,6 @@ public class HelloController {
 
     @FXML
     protected void initialize() throws FileNotFoundException {
-        // Set the background image when the class is initialized
         setMainPaneBackground();
     }
 
