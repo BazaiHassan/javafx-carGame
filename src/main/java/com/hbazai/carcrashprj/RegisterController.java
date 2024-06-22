@@ -20,6 +20,7 @@ public class RegisterController {
     private PasswordField passwordField;
 
 
+
     @FXML
     private void handleRegisterAction() {
         String username = usernameField.getText();
@@ -29,7 +30,9 @@ public class RegisterController {
             showCustomAlert("Username Already Taken", "The username '" + username + "' is already taken.");
         } else {
             saveToFile(username, password);
-            showCustomAlert("Registration Successful", "User '" + username + "' registered successfully.");
+            showCustomAlert("Registration Successful", "User '" + username + "' can play now.");
+            Constants.USER_CHECK = true;
+            Constants.USERNAME = username;
         }
     }
 
@@ -37,8 +40,8 @@ public class RegisterController {
     private void handleBackAction(ActionEvent event) {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Replace this with your main application start logic or close the window as needed
-            stage.close();
+            HelloApplication main = new HelloApplication();
+            main.start(stage);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,14 +59,13 @@ public class RegisterController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false; // Username not found
+        return false;
     }
 
     private void saveToFile(String username, String password) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
             writer.write("Username: " + username + ", Password: " + password + ", Score: 0");
             writer.newLine();
-            System.out.println("User saved: " + username);
         } catch (IOException e) {
             e.printStackTrace();
         }

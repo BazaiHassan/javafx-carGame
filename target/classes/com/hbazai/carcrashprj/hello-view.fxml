@@ -8,6 +8,7 @@
       fx:controller="com.hbazai.carcrashprj.HelloController" stylesheets="@styles.css">
     <children>
         <VBox alignment="CENTER" spacing="70.0" prefWidth="400.0" prefHeight="600.0">
+            <Button id="playButton" mnemonicParsing="false" onAction="#startBtnAction" text="Play" scaleX="2" scaleY="2"/>
             <Button id="scoreButton" mnemonicParsing="false" onAction="#scoreBtnAction" text="Scores"/>
             <Button id="registerButton" mnemonicParsing="false" onAction="#registerBtnAction" text="Register"/>
             <Button id="loginButton" mnemonicParsing="false" onAction="#loginBtnAction" text="Login"/>

@@ -9,6 +9,18 @@
     -fx-margin: 10; /* Add margins */
 }
 
+#playButton {
+    -fx-background-color: #45a049; /* Green */
+    -fx-padding: 0; /* Remove default padding */
+    -fx-background-radius: 50%; /* Circular background */
+    -fx-border-radius: 50%; /* Circular border */
+    -fx-min-width: 50px; /* Minimum width */
+    -fx-min-height: 50px; /* Minimum height */
+    -fx-max-width: 50px; /* Maximum width */
+    -fx-max-height: 50px; /* Maximum height */
+    -fx-border-color: transparent; /* Border color */
+}
+
 .button:hover {
     -fx-background-color: #45a049; /* Darker green */
 }

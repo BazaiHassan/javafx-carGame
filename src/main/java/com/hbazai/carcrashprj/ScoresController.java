@@ -45,7 +45,12 @@ public class ScoresController {
         backButton.setOnAction(event -> {
             // Close the current window or perform other actions
             Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.close();
+            HelloApplication main = new HelloApplication();
+            try {
+                main.start(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 

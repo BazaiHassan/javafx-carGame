@@ -20,19 +20,19 @@ import static com.hbazai.carcrashprj.Fuel.consumeFuel;
 
 public class ScreenManager {
     private Pane mainPane;
-    private List<ImageView> hearts; // List to store heart images
-    private List<Fire> bullets; // List to store bullets
+    private List<ImageView> hearts;
+    private List<Fire> bullets;
     private List<ImageView> fuels;
     private Timeline collisionCheckTimeline;
-    private int passedOrDestroyedCount = 0; // Counter for passed or destroyed enemy cars
+    private int passedOrDestroyedCount = 0;
     private boolean gameOver = false;
     private GenerateEnemyCar generateEnemyCar;
     private int numberOfFuel = 5;
 
     public ScreenManager(Pane mainPane) {
         this.mainPane = mainPane;
-        this.hearts = new ArrayList<>(); // Initialize the list
-        this.bullets = new ArrayList<>(); // Initialize the bullet list
+        this.hearts = new ArrayList<>();
+        this.bullets = new ArrayList<>();
         this.fuels = new ArrayList<>();
     }
 

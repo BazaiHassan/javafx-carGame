@@ -24,11 +24,15 @@ public class HelloController {
         setMainPaneBackground();
     }
 
-//    @FXML
-//    protected void scoreBtnAction() throws FileNotFoundException {
-//        ScreenManager sm = new ScreenManager(mainPane);
-//        sm.start();
-//    }
+    @FXML
+    protected void startBtnAction() throws FileNotFoundException {
+        if (Constants.USER_CHECK){
+            ScreenManager sm = new ScreenManager(mainPane);
+            sm.start();
+        }else {
+            showCustomAlert("Failed","You must create an account or login.");
+        }
+    }
 
     @FXML
     protected void scoreBtnAction(ActionEvent event){
@@ -79,6 +83,10 @@ public class HelloController {
         mainPane.setBackground(background);
     }
 
+    private void showCustomAlert(String title, String message) {
+        CustomAlert alert = new CustomAlert(title, message);
+        alert.showAndWait();
+    }
 
 
 }

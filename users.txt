@@ -20,3 +20,10 @@ Username: quincy19, Password: 12345, Score: 1000
 Username: rachel20, Password: 12345, Score: 1050
 Username: sybil21, Password: 12345, Score: 1100
 Username: trent22, Password: 12345, Score: 1150
+Username: bbb, Password: 12345, Score: 0
+Username: bbbb, Password: kkkkkk, Score: 0
+Username: dddd, Password: dddddd, Score: 0
+Username: as, Password: sdfsdsdf, Score: 0
+Username: hhh, Password: bhg, Score: 0
+Username: llllk, Password: nnnccc, Score: 0
+Username: hhhh, Password: bbbbbb, Score: 0

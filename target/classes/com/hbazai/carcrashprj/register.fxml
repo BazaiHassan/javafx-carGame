@@ -23,7 +23,7 @@
                 </HBox>
                 <HBox spacing="10" alignment="CENTER">
                     <Button text="Register" onAction="#handleRegisterAction" styleClass="button"/>
-                    <Button text="Back"  styleClass="red-button" onAction="#handleBackAction"/>
+                    <Button text="Back To Menu"  styleClass="red-button" onAction="#handleBackAction"/>
                 </HBox>
             </children>
         </VBox>

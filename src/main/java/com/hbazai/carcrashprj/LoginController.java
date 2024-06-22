@@ -18,15 +18,18 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
+
     @FXML
     private void handleLoginAction() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         if (authenticateUser(username, password)) {
-            System.out.println("Login successful!");
+            showCustomAlert("Congratulation","Login was successful.");
+            Constants.USER_CHECK = true;
+            Constants.USERNAME = username;
         } else {
-            System.out.println("Incorrect username or password.");
+            showCustomAlert("Failed","Incorrect username or password.");
         }
     }
 
@@ -64,6 +67,11 @@ public class LoginController {
         }
 
         return isAuthenticated;
+    }
+
+    private void showCustomAlert(String title, String message) {
+        CustomAlert alert = new CustomAlert(title, message);
+        alert.showAndWait();
     }
 
 }
